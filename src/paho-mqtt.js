@@ -772,7 +772,8 @@ function onMessageArrived(message) {
       // The conditional inclusion of path in the key is for backward
       // compatibility to when the path was not configurable and assumed to
       // be /mqtt
-      this._localKey = host + ":" + port + (path != "/mqtt" ? ":" + path : "") + ":" + clientId + ":";
+      //this._localKey = host + ":" + port + (path != "/mqtt" ? ":" + path : "") + ":" + clientId + ":";
+      this._localKey = host + (path != "/mqtt" ? ":" + path : "") + ":" + clientId + ":";
 
       // Create private instance-only message queue
       // Internal queue of messages to be sent, in sending order.
@@ -1746,7 +1747,8 @@ function onMessageArrived(message) {
           throw new Error(format(ERROR.INVALID_TYPE, [typeof path, "path"]));
 
         var ipv6AddSBracket = (host.indexOf(":") !== -1 && host.slice(0, 1) !== "[" && host.slice(-1) !== "]");
-        uri = "ws://" + (ipv6AddSBracket ? "[" + host + "]" : host) + ":" + port + path;
+        //uri = "ws://" + (ipv6AddSBracket ? "[" + host + "]" : host) + ":" + port + path;
+        uri = "ws://" + (ipv6AddSBracket ? "[" + host + "]" : host) + path;
       }
 
       var clientIdLength = 0;
@@ -1980,7 +1982,8 @@ function onMessageArrived(message) {
               var port = connectOptions.ports[i];
 
               var ipv6 = (host.indexOf(":") !== -1);
-              uri = "ws://" + (ipv6 ? "[" + host + "]" : host) + ":" + port + path;
+              //uri = "ws://" + (ipv6 ? "[" + host + "]" : host) + ":" + port + path;
+              uri = "ws://" + (ipv6 ? "[" + host + "]" : host) + path;
               connectOptions.uris.push(uri);
             }
           } else {
